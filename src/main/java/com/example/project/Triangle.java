@@ -8,12 +8,36 @@ public class Triangle {
     // to contain the three Point objects
     public Triangle(Point p1, Point p2, Point p3) {
       /* IMPLEMENT ME */
+      vertices = new Point[3];
+      vertices[0] = p1;
+      vertices[1] = p2;
+      vertices[2] = p3;
+    }
+
+    public Point getP1() {
+      return vertices[0];
+    }
+
+    public Point getP2() {
+      return vertices[1];
+    }
+
+    public Point getP3() {
+      return vertices[2];
     }
     
+    public Point[] getVertices() {
+      return vertices;
+    }
+
     // Returns the perimeter of the Triangle
     // HINT: use the distanceTo method that you wrote in the Point class
     public double perimeter() {
       /* IMPLEMENT ME */
+      double length1 = vertices[0].distanceTo(vertices[1]);
+      double length2 = vertices[0].distanceTo(vertices[2]);
+      double length3 = vertices[1].distanceTo(vertices[2]);
+      return length1 + length2 + length3;
     }
   
     // Returns a String with the three vertices that make up the Triangle;
@@ -21,6 +45,7 @@ public class Triangle {
     // this method should return: "[(6, 10), (11, 15), (18, 7)]"
     public String triangleInfo() {
       /* IMPLEMENT ME */
+      return "[" + vertices[0].pointInfo() + ", " + vertices[1].pointInfo() + ", " + vertices[2].pointInfo() + "]";
     }
   }
   
