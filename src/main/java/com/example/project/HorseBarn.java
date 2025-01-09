@@ -13,12 +13,14 @@ public class HorseBarn {
      */
     public HorseBarn(int numStalls) {
         /* to be implemented in part (a) */
+        stalls = new Horse[numStalls];
     }
 
     /** Assigns stalls to reference sampleHorses
      */
     public HorseBarn(Horse[] sampleStalls) {
         /* to be implemented in part (a) */
+        stalls = sampleStalls;
     }
 
     /** Getter/accessor method for stalls
@@ -26,12 +28,23 @@ public class HorseBarn {
      *  @return  a references to the stalls array
      */
     // to be added in part (a)
+    public Horse[] getStalls() {
+        return stalls;
+    }
 
     /** Returns a string that shows which horses are in which stalls
      */
     public String horseBarnInfo() {
         /* to be implemented in part (b) */
-        return "";
+        String str = "";
+        for (int i = 0; i < stalls.length; i++) {
+            if (stalls[i] == null) {
+                str += "Stall " + i + ": empty" + "\n";
+            } else {
+                str += "Stall " + i + ": " + stalls[i].horseInfo() + "\n";
+            }
+        }
+        return str;
     }
 
     /** Places a Horse into stalls at the index indicated by stall
@@ -43,6 +56,7 @@ public class HorseBarn {
      */
     public void placeHorse(Horse horse, int stall) {
         /* to be implemented in part (c) */
+        stalls[stall] = horse;
     }
 
     /** Returns the index of the stall that contains the horse with the specified name.
@@ -55,7 +69,14 @@ public class HorseBarn {
      */
     public int findHorseStall(String name) {
         /* to be implemented in part (d) */
-        return 0;
+        for (int i = 0; i < stalls.length; i++) {
+            if (stalls[i] != null) {
+                if (stalls[i].getName().equals(name)) {
+                    return i;
+                }
+            }
+        }
+        return -1;
     }
 
     /** Consolidates the barn by moving horses so that the horses are in adjacent
@@ -65,5 +86,19 @@ public class HorseBarn {
      */
     public void consolidate() {
         /* to be implemented in part (e) */
+        Horse next;
+        int idx = stalls.length-1;
+        for (int i = 0; i < stalls.length-1; i++) {
+            if (stalls[i] == null) {
+                for (int j = stalls.length-1; j > i; j--) {
+                    if (stalls[j] != null) {
+                        next = stalls[j];
+                        stalls[i] = next;
+                        idx = j;
+                    }
+                }
+                stalls[idx] = null;
+            }
+        }
     }
 }
